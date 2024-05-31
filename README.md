@@ -52,9 +52,3 @@ python run_animate.py
 ```python
 python run_svd.py
 ```
-
-python run_pixart.py
-
-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
-
-git remote set-url origin https://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@github.com/czg1225/AsyncDiff.git
