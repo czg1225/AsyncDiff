@@ -1,7 +1,7 @@
 # AsyncDiff: Parallelizing Diffusion Models by Asynchronous Denoisin
 
 <p align="center">
-<img src="assets/logo.png" width="30%"> <br>
+<img src="assets/logo_modified.png" width="25%"> <br>
 </p>
 
 ## 🔧 Quick Start
