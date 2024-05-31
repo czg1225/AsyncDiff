@@ -6,7 +6,7 @@
 </p>
 
 <div align="center">
-<h1>LLM-Pruner</h1>
+<h1>AsyncDiff</h1>
   <div align="center">
   <a href="https://opensource.org/licenses/Apache-2.0">
     <img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache%202.0-4E94CE.svg">
@@ -33,8 +33,7 @@
     <img src="https://img.shields.io/badge/LLMs-Baichuan-78ac62.svg?style=flat-square" alt="Baichuan">
   </a>
 </div>
-<h3>On the Structural Pruning of Large Language Models<h3>
-:llama: :llama: :llama: :llama: :llama: Compress your LLMs to any size! :llama: :llama: :llama: :llama: :llama:
+<h3>Parallelizing Diffusion Models by Asynchronous Denoising<h3>
 </div>
 
 
