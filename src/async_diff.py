@@ -3,8 +3,9 @@ from .tools import ResultPicker
 from .pipe_config import splite_model
 
 class ModulePlugin(object):
-    def __init__(self, run_locally, module) -> None:
-        self.run_locally = run_locally
+    def __init__(self, mode, module) -> None:
+        self.mode = mode
+        self.run_locally = dist.get_rank() == mode
         self.module = module
         self.module.plugin = self
         self.init_state()
@@ -18,7 +19,7 @@ class ModulePlugin(object):
     
     def cache_sync(self, async_flag):
         if self.infer_step >= self.warmup_n:
-            dist.broadcast(self.cached_result, self.rank if self.run_locally else 1-self.rank, async_op=async_flag)
+            dist.broadcast(self.cached_result, self.mode, async_op=async_flag)
 
     def inject_forward(self):
         assert not hasattr(self.module, 'old_forward'), "Module already has old_forward attribute."
@@ -39,12 +40,14 @@ class ModulePlugin(object):
 
 class AsyncDiff(object):
     def __init__(self, pipeline, model_n=2, stride=1, warm_up=1, time_shift=False):
+        dist.init_process_group("nccl")
+        if not dist.get_rank(): assert model_n + stride - 1 == dist.get_world_size(), "[ERROR]: The strategy is not compatible with the number of devices. (model_n + stride - 1) should be equal to world_size."
         self.model_n = model_n
         self.stride = stride
         self.warm_up = warm_up
         self.time_shift = time_shift
-        self.pipeline = pipeline
-        self.pipe_id = pipeline._name_or_path
+        self.pipeline = pipeline.to(f"cuda:{dist.get_rank()}")
+        self.pipe_id = pipeline.config._name_or_path
         self.reformed_modules = {}
         self.reform_pipeline()
 
@@ -55,10 +58,8 @@ class AsyncDiff(object):
 
 
     def reform_module(self, module, module_id, mode):
-        print(f"Reforming module {module_id} in mode {mode}")
-        print(f"Mode: {mode}", f"Rank: {dist.get_rank()}")
-        ModulePlugin(dist.get_rank()==mode, module)
-        self.reformed_modules[module_id] = module
+        ModulePlugin(mode, module)
+        self.reformed_modules[(mode, module_id)] = module
     
     def reform_unet(self):
         unet = self.pipeline.unet
@@ -74,7 +75,7 @@ class AsyncDiff(object):
                     args = list(args)
                     args[1] = self.pipeline.scheduler.timesteps[infer_step-1]
             sample = unet.old_forward(*args, **kwargs)[0]
-            dist.broadcast(sample, 1)
+            dist.broadcast(sample, self.model_n-1)
             return sample,
 
         unet.forward = unet_forward
