@@ -3,9 +3,8 @@ from .tools import ResultPicker
 from .pipe_config import splite_model
 
 class ModulePlugin(object):
-    def __init__(self, mode, module) -> None:
-        self.mode = mode
-        self.run_locally = dist.get_rank() == mode
+    def __init__(self,module,  model_i, stride=1, run_mode=None) -> None:
+        self.model_i, self.stride, self.run_mode = model_i, stride, run_mode
         self.module = module
         self.module.plugin = self
         self.init_state()
@@ -19,7 +18,7 @@ class ModulePlugin(object):
     
     def cache_sync(self, async_flag):
         if self.infer_step >= self.warmup_n:
-            dist.broadcast(self.cached_result, self.mode, async_op=async_flag)
+            dist.broadcast(self.cached_result, self.model_i, async_op=async_flag)
 
     def inject_forward(self):
         assert not hasattr(self.module, 'old_forward'), "Module already has old_forward attribute."
@@ -27,7 +26,8 @@ class ModulePlugin(object):
         module.old_forward = module.forward
         
         def new_forward(*args, **kwargs):
-            if self.infer_step<self.warmup_n or self.run_locally:
+            run_locally = self.run_mode == (self.model_i, self.infer_step%self.stride)
+            if self.infer_step<self.warmup_n or run_locally:
                 result = module.old_forward(*args, **kwargs)
                 if self.infer_step + 1 >= self.warmup_n:
                     self.cached_result, self.result_structure = ResultPicker.dump(result)
@@ -57,9 +57,10 @@ class AsyncDiff(object):
             each.plugin.init_state(warmup_n=warm_up)
 
 
-    def reform_module(self, module, module_id, mode):
-        ModulePlugin(mode, module)
-        self.reformed_modules[(mode, module_id)] = module
+    def reform_module(self, module, module_id, model_i):
+        run_mode = (dist.get_rank(), 0) if dist.get_rank() < self.model_n else (self.model_n -1, dist.get_rank() - self.model_n + 1)
+        ModulePlugin(module, model_i, self.stride, run_mode)
+        self.reformed_modules[(model_i, module_id)] = module
     
     def reform_unet(self):
         unet = self.pipeline.unet
@@ -67,8 +68,10 @@ class AsyncDiff(object):
         unet.old_forward = unet.forward
 
         def unet_forward(*args, **kwargs):
-            for each in self.reformed_modules.values():
-                each.plugin.cache_sync(False)
+            infer_step = self.reformed_modules[(0, 0)].plugin.infer_step
+            if infer_step and infer_step%self.stride == 0:
+                for each in self.reformed_modules.values():
+                    each.plugin.cache_sync(False)
             if self.time_shift:
                 infer_step = self.reformed_modules[0].plugin.infer_step
                 if infer_step>=self.warm_up:
@@ -84,6 +87,6 @@ class AsyncDiff(object):
     def reform_pipeline(self):
         models = splite_model(self.pipeline, self.pipe_id, self.model_n)
         for model_i, sub_model in enumerate(models):
-            for i, module in enumerate(sub_model):
-                self.reform_module(module, i, model_i)
+            for module_id, module in enumerate(sub_model):
+                self.reform_module(module, module_id, model_i)
         self.reform_unet()
