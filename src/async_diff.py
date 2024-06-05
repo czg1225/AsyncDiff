@@ -78,7 +78,8 @@ class AsyncDiff(object):
                     args = list(args)
                     args[1] = self.pipeline.scheduler.timesteps[infer_step-1]
             sample = unet.old_forward(*args, **kwargs)[0]
-            dist.broadcast(sample, self.model_n-1)
+            if infer_step and infer_step%self.stride == 0:
+                dist.broadcast(sample, self.model_n-1)
             return sample,
 
         unet.forward = unet_forward
