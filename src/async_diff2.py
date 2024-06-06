@@ -26,15 +26,18 @@ class ModulePlugin(object):
         module.old_forward = module.forward
         
         def new_forward(*args, **kwargs):
-            run_locally = self.run_mode == (self.model_i, self.infer_step%self.stride)
+        
+            run_locally = (self.run_mode[0]==self.model_i) and ((self.infer_step-1)%self.stride==0)
+
             if self.infer_step<self.warmup_n or run_locally:
                 result = module.old_forward(*args, **kwargs)
-                if self.infer_step + 1 >= self.warmup_n:
+                if (self.infer_step+1==self.warmup_n) or (self.infer_step + 1 > self.warmup_n and self.run_mode[1]==0):
                     self.cached_result, self.result_structure = ResultPicker.dump(result)
             else:
                 result = ResultPicker.load(self.cached_result, self.result_structure)
             self.infer_step += 1
             return result
+        
         
         module.forward = new_forward
 
@@ -42,6 +45,7 @@ class AsyncDiff(object):
     def __init__(self, pipeline, model_n=2, stride=1, warm_up=1, time_shift=False):
         dist.init_process_group("nccl")
         if not dist.get_rank(): assert model_n + stride - 1 == dist.get_world_size(), "[ERROR]: The strategy is not compatible with the number of devices. (model_n + stride - 1) should be equal to world_size."
+        assert stride==1 or stride==2, "[ERROR]: The stride should be set as 1 or 2"
         self.model_n = model_n
         self.stride = stride
         self.warm_up = warm_up
@@ -56,9 +60,8 @@ class AsyncDiff(object):
         for each in self.reformed_modules.values():
             each.plugin.init_state(warmup_n=warm_up)
 
-
     def reform_module(self, module, module_id, model_i):
-        run_mode = (dist.get_rank(), 0) if dist.get_rank() < self.model_n else (self.model_n -1, dist.get_rank() - self.model_n + 1)
+        run_mode = (dist.get_rank(), 0) if dist.get_rank() < self.model_n else (self.model_n -1, 1)
         ModulePlugin(module, model_i, self.stride, run_mode)
         self.reformed_modules[(model_i, module_id)] = module
     
@@ -68,19 +71,46 @@ class AsyncDiff(object):
         unet.old_forward = unet.forward
 
         def unet_forward(*args, **kwargs):
+        
             infer_step = self.reformed_modules[(0, 0)].plugin.infer_step
-            if infer_step and infer_step%self.stride == 0:
-                for each in self.reformed_modules.values():
-                    each.plugin.cache_sync(False)
-            if self.time_shift:
-                infer_step = self.reformed_modules[0].plugin.infer_step
+
+            if self.stride==1:
+                if (infer_step-1)%self.stride == 0:
+                    for each in self.reformed_modules.values():
+                        each.plugin.cache_sync(False)
+                if self.time_shift:
+                    if infer_step>=self.warm_up:
+                        args = list(args)
+                        args[1] = self.pipeline.scheduler.timesteps[infer_step-1]
+                sample = unet.old_forward(*args, **kwargs)[0]
+                infer_step = self.reformed_modules[(0, 0)].plugin.infer_step
+                if infer_step>=self.warm_up and (infer_step-1)%self.stride == 0:
+                    dist.broadcast(sample, self.model_n-1)
+                return sample,
+            else:
+                if (infer_step-1)%self.stride == 1:
+                    for each in self.reformed_modules.values():
+                        each.plugin.cache_sync(False)
+
+                if self.time_shift:
+                    shift = 1
+                else:
+                    shift = 0
+
                 if infer_step>=self.warm_up:
-                    args = list(args)
-                    args[1] = self.pipeline.scheduler.timesteps[infer_step-1]
-            sample = unet.old_forward(*args, **kwargs)[0]
-            if infer_step and infer_step%self.stride == 0:
-                dist.broadcast(sample, self.model_n-1)
-            return sample,
+                    if dist.get_rank() < self.model_n and (infer_step-1)%self.stride == 0 and infer_step< len(self.pipeline.scheduler.timesteps)-1:
+                        args = list(args)
+                        args[1] = self.pipeline.scheduler.timesteps[infer_step+1-shift]
+                    else:
+                        args = list(args)
+                        args[1] = self.pipeline.scheduler.timesteps[infer_step-shift]
+                sample = unet.old_forward(*args, **kwargs)[0]
+
+                infer_step = self.reformed_modules[(0, 0)].plugin.infer_step
+                if infer_step>=self.warm_up and (infer_step-1)%self.stride == 1:
+                    dist.broadcast(sample, self.model_n)
+    
+                return sample,
 
         unet.forward = unet_forward
 

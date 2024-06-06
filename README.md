@@ -94,3 +94,21 @@ python run_animate.py
 ```python
 python run_svd.py
 ```
+
+CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node=1 scripts/sd_example.py
+CUDA_VISIBLE_DEVICES=6,7 torchrun --nproc_per_node=2 --master-port 29511 scripts/sd_example.py
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node=4 --master-port 29511 scripts/sd_example.py
+
+CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 runs.py
+
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node=2 --master-port 29511 runs.py
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 runs.py
+
+CUDA_VISIBLE_DEVICES=0,1,2 torchrun --nproc_per_node=3 --master-port 29511 runs.py
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 sd_example.py
+
+CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 sdxl_example.py --model_n 2 --stride 1 --warm_up 2
+
+CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 svd_example.py --model_n 2 --stride 1 --warm_up 1
