@@ -82,11 +82,13 @@ class AsyncDiff(object):
                     if infer_step>=self.warm_up:
                         args = list(args)
                         args[1] = self.pipeline.scheduler.timesteps[infer_step-1]
-                sample = unet.old_forward(*args, **kwargs)[0]
+                output = unet.old_forward(*args, **kwargs)
                 infer_step = self.reformed_modules[(0, 0)].plugin.infer_step
                 if infer_step>=self.warm_up and (infer_step-1)%self.stride == 0:
+                    sample = output.sample.contiguous()
                     dist.broadcast(sample, self.model_n-1)
-                return sample,
+                    output.sample = sample
+                return output
             else:
                 if (infer_step-1)%self.stride == 1:
                     for each in self.reformed_modules.values():
@@ -104,13 +106,15 @@ class AsyncDiff(object):
                     else:
                         args = list(args)
                         args[1] = self.pipeline.scheduler.timesteps[infer_step-shift]
-                sample = unet.old_forward(*args, **kwargs)[0]
+                output = unet.old_forward(*args, **kwargs)
 
                 infer_step = self.reformed_modules[(0, 0)].plugin.infer_step
                 if infer_step>=self.warm_up and (infer_step-1)%self.stride == 1:
-                    dist.broadcast(sample, self.model_n)
+                    sample = output.sample.contiguous()
+                    dist.broadcast(sample, self.model_n-1)
+                    output.sample = sample
     
-                return sample,
+                return output
 
         unet.forward = unet_forward
 

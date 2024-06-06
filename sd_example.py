@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
 from diffusers import StableDiffusionPipeline
-from src.async_diff2 import AsyncDiff
+from src.async_diff import AsyncDiff
 import time
 import argparse
 
