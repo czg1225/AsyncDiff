@@ -112,3 +112,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 sd_
 CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 sdxl_example.py --model_n 2 --stride 1 --warm_up 2
 
 CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 svd_example.py --model_n 2 --stride 1 --warm_up 1
+
+git remote set-url origin https://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@github.com/czg1225/AysncDiff.git
+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
