@@ -29,15 +29,15 @@ if __name__ == "__main__":
     )
     async_diff = AsyncDiff(pipeline, model_n=args.model_n, stride=args.stride, time_shift=args.time_shift)
 
-    # # warm up
-    # torch.manual_seed(args.seed)
-    # torch.cuda.manual_seed_all(args.seed)
-    # async_diff.reset_state(warm_up=args.warm_up)
-    # frames = pipeline(
-    #         image, 
-    #         decode_chunk_size=8,
-    #         num_inference_steps=50
-    #     ).frames[0]
+    # warm up
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed_all(args.seed)
+    async_diff.reset_state(warm_up=args.warm_up)
+    frames = pipeline(
+            image, 
+            decode_chunk_size=8,
+            num_inference_steps=50
+        ).frames[0]
     
     # inference
     torch.manual_seed(args.seed)
@@ -49,7 +49,8 @@ if __name__ == "__main__":
             decode_chunk_size=8,
             num_inference_steps=50
         ).frames[0]
-    print(f"Time taken: {time.time()-start:.2f} seconds.")
+    print(f"Rank {dist.get_rank()} Time taken: {time.time()-start:.2f} seconds.")
+    
 
     if dist.get_rank() == 0:
         export_to_video(frames, "{}_async.mp4".format(file_name), fps=7)

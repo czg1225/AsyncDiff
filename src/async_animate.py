@@ -71,6 +71,8 @@ class AsyncDiff(object):
         unet.old_forward = unet.forward
 
         def unet_forward(*args, **kwargs):
+
+            # return unet.old_forward(*args, **kwargs)
         
             infer_step = self.reformed_modules[(0, 0)].plugin.infer_step
 

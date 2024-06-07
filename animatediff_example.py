@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
 from diffusers.utils import export_to_gif
-from newAsync.src.async_animate import AsyncDiff
+from src.async_animate import AsyncDiff
 from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
 import time
 import argparse
@@ -57,7 +57,7 @@ if __name__ == "__main__":
             guidance_scale=7.5,
             num_inference_steps=50,
         ).frames[0]
-    print(f"Time taken: {time.time()-start:.2f} seconds.")
+    print(f"Rank {dist.get_rank()} Time taken: {time.time()-start:.2f} seconds.")
 
     if dist.get_rank() == 0:
         export_to_gif(frames, "animation_async.gif")

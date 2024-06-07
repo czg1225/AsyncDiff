@@ -42,7 +42,7 @@ if __name__ == "__main__":
         args.prompt,
         num_inference_steps=50,
     ).images[0]
-    print(f"Time taken: {time.time()-start:.2f} seconds.")
+    print(f"Rank {dist.get_rank()} Time taken: {time.time()-start:.2f} seconds.")
 
     if dist.get_rank() == 0:
         image.save(f"output.jpg")
