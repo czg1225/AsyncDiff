@@ -1,4 +1,5 @@
 import torch.distributed as dist
+import torch
 from .tools import ResultPicker
 from .pipe_config import splite_model
 
@@ -51,6 +52,7 @@ class AsyncDiff(object):
         self.warm_up = warm_up
         self.time_shift = time_shift
         self.pipeline = pipeline.to(f"cuda:{dist.get_rank()}")
+        torch.cuda.set_device(f"cuda:{dist.get_rank()}")
         self.pipe_id = pipeline.config._name_or_path
         self.reformed_modules = {}
         self.reform_pipeline()
