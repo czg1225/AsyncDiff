@@ -100,13 +100,13 @@ Here, we use the Stable Diffusion pipeline as an example. You can replace `pipel
 * `model_n`: Number of components into which the denoising model is divided. Options: 2, 3, or 4.
 * `stride`: Denoising stride of each parallel computing batch. Options: 1 or 2.
 * `warm_up`: Number of steps for the warm-up stage. More warm-up steps can achieve pixel-level consistency with the original output while slightly reducing processing speed.
-* `time_shift`: Enables time shifting. Setting `time_shift` to `true` can enhance the denoising capability of the diffusion model. However, it should generally remain `false`. Only enable `time_shift` when the accelerated model produces images or videos with significant noise.
+* `time_shift`: Enables time shifting. Setting `time_shift` to `True` can enhance the denoising capability of the diffusion model. However, it should generally remain `False`. Only enable `time_shift` when the accelerated model produces images or videos with significant noise.
 
 
 
 
 
-## Inference：
+## Inference
 We offer detailed scripts for accelerating inference of SD 2.1, SD 1.5, SDXL, AnimateDiff, and SVD using our AsyncDiff framework.
 
 ### Accelerate Stable Diffusion XL:
@@ -139,17 +139,9 @@ Qualitative Results on SDXL. More qualitative results can be found in out paper.
 Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion models, showcasing various configurations. More quantitative results can be found in out paper.
 ![Quantitative Results](assets/quantitative.png)
 
-CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 runs.py
 
-CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node=2 --master-port 29511 runs.py
 
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 runs.py
 
-CUDA_VISIBLE_DEVICES=0,1,2 torchrun --nproc_per_node=3 --master-port 29511 runs.py
-
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 sd_example.py
-
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 sd_example.py --model_n 3 --stride 2 --warm_up 9
 
 CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 run_sd.py --model_n 2 --stride 1 --warm_up 1
 
