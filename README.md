@@ -159,8 +159,5 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 
 CUDA_VISIBLE_DEVICES=4,5 python -m torch.distributed.run --nproc_per_node=2 --master-port 29511 --run-path src/examples/run_animatediff.py --model_n 2 --stride 1 --warm_up 2
 
 
-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
-git clone https://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@github.com/czg1225/asyncdiff_page.git
-
 git mv src/examples/animatediff_example.py src/examples/run_animatediff.py
 git mv src/async_diff.py src/async_sd.py
