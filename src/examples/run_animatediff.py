@@ -1,6 +1,5 @@
 import torch
 import torch.distributed as dist
-import torch.multiprocessing as mp
 from diffusers.utils import export_to_gif
 from src.async_animate import AsyncDiff
 from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter

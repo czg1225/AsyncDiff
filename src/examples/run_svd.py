@@ -1,8 +1,7 @@
 import torch
 import torch.distributed as dist
-import torch.multiprocessing as mp
 from diffusers import StableVideoDiffusionPipeline
-from src.async_diff import AsyncDiff
+from src.async_sd import AsyncDiff
 import time
 import argparse
 from diffusers.utils import load_image, export_to_video, export_to_gif

@@ -112,14 +112,18 @@ CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 run_sd.
 
 CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 run_animatediff.py --model_n 2 --stride 1 --warm_up 2 --prompt "The sun rises slowly, the waves sparkle" --seed 49 --time_shift False
 
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 svd_example.py --model_n 4 --stride 1 --warm_up 1
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 --run-path src/examples/run_sd.py --model_n 3 --stride 2 --warm_up 9
 
 git remote set-url origin https://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@github.com/czg1225/AsyncDiff.git
 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
 
 
-
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --master-port 29511 --run-path src/examples/run_sd.py --model_n 3 --stride 2 --warm_up 9
 
 
 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
 git clone https://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@github.com/czg1225/asyncdiff_page.git
+
+git mv src/examples/animatediff_example.py src/examples/run_animatediff.py
+git mv src/async_diff.py src/async_sd.py

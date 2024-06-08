@@ -1,9 +1,6 @@
 import torch
 from typing import List, Tuple
 
-import torch
-from typing import Tuple, List
-
 class ResultPicker(object):
     @staticmethod
     def dump(result):
