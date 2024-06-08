@@ -106,27 +106,27 @@ Here, we use the Stable Diffusion pipeline as an example. You can replace `pipel
 
 
 
-### Inference：
+## Inference：
 We offer detailed scripts for accelerating inference of SD 2.1, SD 1.5, SDXL, AnimateDiff, and SVD using our AsyncDiff framework.
 
-#### Accelerate Stable Diffusion XL:
+### Accelerate Stable Diffusion XL:
 ```python
 python run_sdxl.py
 ```
 
-#### Accelerate Stable Diffusion 2.1 or 1.5:
+### Accelerate Stable Diffusion 2.1 or 1.5:
 ```python
 python run_sd.py
 ```
 
 
-#### Accelerate Animate Diffusion:
+### Accelerate Animate Diffusion:
 ```python
 python run_animate.py
 ```
 
 
-#### Accelerate Stable Video Diffusion:
+### Accelerate Stable Video Diffusion:
 ```python
 python run_svd.py
 ```
