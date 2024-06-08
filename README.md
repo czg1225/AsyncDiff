@@ -80,6 +80,7 @@ prepared in advance, breaking the dependency chain and facilitating parallel pro
   ```
 
 ### Usage Example
+Simply add two lines of code to enable asynchronous parallel inference for the diffusion model.
 ```python
 import torch
 from diffusers import StableDiffusionPipeline
@@ -95,35 +96,27 @@ image = pipeline(<prompts>).images[0]
 if dist.get_rank() == 0:
   image.save(f"output.jpg")
 ```
+Here, we use the Stable Diffusion pipeline as an example. You can replace `pipeline` with any variant of the Stable Diffusion pipeline, such as SD 2.1, SD 1.5, SDXL, or SVD. We also provide the implementation of AsyncDiff for AnimateDiff in `src.async_animate`.
+* `model_n`: Number of components into which the denoising model is divided. Options: 2, 3, or 4.
+* `stride`: Denoising stride of each parallel computing batch. Options: 1 or 2.
+* `warm_up`: Number of steps for the warm-up stage. More warm-up steps can achieve pixel-level consistency with the original output while slightly reducing processing speed.
+* `time_shift`: Enables time shifting. Setting `time_shift` to `true` can enhance the denoising capability of the diffusion model. However, it should generally remain `false`. Only enable `time_shift` when the accelerated model produces images or videos with significant noise.
+
 
 
 
 
 ### Inference：
-Please adjust the following configuration parameters in running scripts (run_sd.py, run_sdxl.py, run_animate.py, run_svd.py).
-
-```python
-config = {
-    "model_name": "stabilityai/stable-diffusion-2-1",
-    "dtype": torch.float16,
-    "strategy":"n3s2",
-    "devices": ["cuda:0","cuda:1", "cuda:2", "cuda:3"],
-    "seed": 20,
-    "step": 50,
-    "time_shift":False,
-    "warm_up":9,
-    }
-
-```
-#### Accelerate Stable Diffusion 2.1 or 1.5:
-```python
-python run_sd.py
-```
-
+We offer detailed scripts for accelerating inference of SD 2.1, SD 1.5, SDXL, AnimateDiff, and SVD using our AsyncDiff framework.
 
 #### Accelerate Stable Diffusion XL:
 ```python
 python run_sdxl.py
+```
+
+#### Accelerate Stable Diffusion 2.1 or 1.5:
+```python
+python run_sd.py
 ```
 
 
@@ -170,6 +163,8 @@ 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
 
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --master-port 29511 --run-path src/examples/run_sd.py --model_n 3 --stride 2 --warm_up 9
+
+CUDA_VISIBLE_DEVICES=4,5 python -m torch.distributed.run --nproc_per_node=2 --master-port 29511 --run-path src/examples/run_animatediff.py --model_n 2 --stride 1 --warm_up 2
 
 
 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

@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     pipeline = StableDiffusionXLPipeline.from_pretrained(
         args.model, torch_dtype=torch.float16, 
-        use_safetensors=True, low_cpu_mem_usage=False
+        use_safetensors=True, low_cpu_mem_usage=True
     )
     async_diff = AsyncDiff(pipeline, model_n=args.model_n, stride=args.stride, time_shift=args.time_shift)
 

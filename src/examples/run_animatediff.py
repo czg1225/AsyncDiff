@@ -19,7 +19,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
-    pipeline = AnimateDiffPipeline.from_pretrained(args.model, motion_adapter=adapter, torch_dtype=torch.float16, low_cpu_mem_usage=False)
+    pipeline = AnimateDiffPipeline.from_pretrained(args.model, motion_adapter=adapter, torch_dtype=torch.float16, low_cpu_mem_usage=True)
     scheduler = DDIMScheduler.from_pretrained(
         args.model,
         subfolder="scheduler",
