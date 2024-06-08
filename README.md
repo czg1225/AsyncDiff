@@ -95,9 +95,6 @@ python run_animate.py
 python run_svd.py
 ```
 
-CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node=1 scripts/sd_example.py
-CUDA_VISIBLE_DEVICES=6,7 torchrun --nproc_per_node=2 --master-port 29511 scripts/sd_example.py
-CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node=4 --master-port 29511 scripts/sd_example.py
 
 CUDA_VISIBLE_DEVICES=4,5 torchrun --nproc_per_node=2 --master-port 29511 runs.py
 
@@ -119,3 +116,10 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master-port 29511 svd
 
 git remote set-url origin https://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@github.com/czg1225/AsyncDiff.git
 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
+
+
+
+
+
+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
+git clone https://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@github.com/czg1225/asyncdiff_page.git
