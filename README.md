@@ -90,8 +90,8 @@ pipeline = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion
 torch_dtype=torch.float16, use_safetensors=True, low_cpu_mem_usage=True)
 
 async_diff = AsyncDiff(pipeline, model_n=2, stride=1, time_shift=False)
-async_diff.reset_state(warm_up=1)
 
+async_diff.reset_state(warm_up=1)
 image = pipeline(<prompts>).images[0]
 if dist.get_rank() == 0:
   image.save(f"output.jpg")
@@ -111,24 +111,24 @@ We offer detailed scripts for accelerating inference of SD 2.1, SD 1.5, SDXL, An
 
 ### Accelerate Stable Diffusion XL:
 ```python
-python run_sdxl.py
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --run-path src/examples/run_sdxl.py
 ```
 
 ### Accelerate Stable Diffusion 2.1 or 1.5:
 ```python
-python run_sd.py
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --run-path src/examples/run_sd.py
 ```
 
 
 ### Accelerate Animate Diffusion:
 ```python
-python run_animate.py
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_animate.py
 ```
 
 
 ### Accelerate Stable Video Diffusion:
 ```python
-python run_svd.py
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_svd.py
 ```
 
 ## Qualitative Results
@@ -138,6 +138,12 @@ Qualitative Results on SDXL. More qualitative results can be found in out paper.
 ## Quantitative Results
 Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion models, showcasing various configurations. More quantitative results can be found in out paper.
 ![Quantitative Results](assets/quantitative.png)
+
+## Bibtex
+```
+@inproceedings{
+}
+```
 
 
 

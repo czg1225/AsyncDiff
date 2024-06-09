@@ -1,4 +1,4 @@
-accelerate==0.20.3
+accelerate==0.29.3
 diffusers==0.24.0
 matplotlib==3.8.0
 munch==4.0.0
