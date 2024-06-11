@@ -74,7 +74,7 @@ prepared in advance, breaking the dependency chain and facilitating parallel pro
 - Create environment：
 
   ```shell
-  conda create -n asyncdiff python=3.9
+  conda create -n asyncdiff python=3.10
   conda activate asyncdiff
   pip install -r requirements.txt
   ```
