@@ -122,7 +122,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 
 
 ### Accelerate Animate Diffusion:
 ```python
-CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_animate.py
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_animatediff.py
 ```
 
 
