@@ -132,7 +132,7 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --ru
 ```
 
 ## Qualitative Results
-Qualitative Results on SDXL. More qualitative results can be found in out paper.
+Qualitative Results on SDXL. More qualitative results can be found in our paper.
 ![Qualitative Results](assets/qualitative.png)
 
 ## Quantitative Results
