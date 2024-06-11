@@ -136,7 +136,7 @@ Qualitative Results on SDXL. More qualitative results can be found in our paper.
 ![Qualitative Results](assets/qualitative.png)
 
 ## Quantitative Results
-Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion models, showcasing various configurations. More quantitative results can be found in out paper.
+Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion models, showcasing various configurations. More quantitative results can be found in our paper.
 ![Quantitative Results](assets/quantitative.png)
 
 ## Bibtex
