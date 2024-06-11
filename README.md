@@ -46,7 +46,7 @@
 <br>
 
 ### Updates
-* 🚀 **June 11, 2024**: Code of AsyncDiff is released.
+* 🚀 **June 12, 2024**: Code of AsyncDiff is released.
 
 ### Supported Diffusion Models:
 - ✅ [Stable Diffusion 2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1)
