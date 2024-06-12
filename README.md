@@ -9,7 +9,7 @@
   <a href="https://opensource.org/licenses/Apache-2.0">
     <img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache%202.0-4E94CE.svg">
   </a>
-  <a href="https://github.com/czg1225/AsyncDiff">
+  <a href="https://arxiv.org/abs/2406.06911">
     <img src="https://img.shields.io/badge/Paper-Arixv-FFB000.svg" alt="Paper">
   </a>
   <a href="https://czg1225.github.io/asyncdiff_page/">
@@ -24,7 +24,7 @@
 > **AsyncDiff: Parallelizing Diffusion Models by Asynchronous Denoising**   
 > [Zigeng Chen](https://github.com/czg1225), [Xinyin Ma](https://horseee.github.io/), [Gongfan Fang](https://fangggf.github.io/), [Zhenxiong Tan](https://github.com/Yuanshi9815), [Xinchao Wang](https://sites.google.com/site/sitexinchaowang/)   
 > [Learning and Vision Lab](http://lv-nus.org/), National University of Singapore  
-> 🥯[[Arxiv]](https://github.com/czg1225/AsyncDiff)🎄[[Project Page]](https://czg1225.github.io/asyncdiff_page/) \
+> 🥯[[Arxiv]](https://arxiv.org/abs/2406.06911)🎄[[Project Page]](https://czg1225.github.io/asyncdiff_page/) \
 > Code Contributors: [Zigeng Chen](https://github.com/czg1225), [Zhenxiong Tan](https://github.com/Yuanshi9815)
 
 <div align="center">
@@ -132,15 +132,21 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --ru
 ```
 
 ## Qualitative Results
-Qualitative Results on SDXL. More qualitative results can be found in our paper.
+Qualitative Results on SDXL. More qualitative results can be found in our [paper](https://arxiv.org/abs/2406.06911).
 ![Qualitative Results](assets/qualitative.png)
 
 ## Quantitative Results
-Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion models, showcasing various configurations. More quantitative results can be found in our paper.
+Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion models, showcasing various configurations. More quantitative results can be found in our [paper](https://arxiv.org/abs/2406.06911).
 ![Quantitative Results](assets/quantitative.png)
 
 ## Bibtex
 ```
-@inproceedings{
+@misc{chen2024asyncdiff,
+      title={AsyncDiff: Parallelizing Diffusion Models by Asynchronous Denoising}, 
+      author={Zigeng Chen and Xinyin Ma and Gongfan Fang and Zhenxiong Tan and Xinchao Wang},
+      year={2024},
+      eprint={2406.06911},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
 }
 ```
