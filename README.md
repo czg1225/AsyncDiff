@@ -46,7 +46,7 @@
 <br>
 
 ### Updates
-* 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [src/examples/run_sd_upscaler.py](https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler).
+* 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [src/examples/run_sd_upscaler.py](https://github.com/czg1225/AsyncDiff/blob/main/src/examples/run_sd_upscaler.py).
 * 🚀 **June 12, 2024**: Code of AsyncDiff is released.
 
 ### Supported Diffusion Models:
