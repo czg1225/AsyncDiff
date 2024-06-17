@@ -46,6 +46,7 @@
 <br>
 
 ### Updates
+* 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [src/examples/run_sd_upscaler.py](https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler).
 * 🚀 **June 12, 2024**: Code of AsyncDiff is released.
 
 ### Supported Diffusion Models:
@@ -120,12 +121,15 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --run-path src/examples/run_sd.py
 ```
 
+### Accelerate Stable Diffusion x4 Upscaler:
+```python
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_sd_upscaler.py
+```
 
 ### Accelerate Animate Diffusion:
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_animatediff.py
 ```
-
 
 ### Accelerate Stable Video Diffusion:
 ```python
