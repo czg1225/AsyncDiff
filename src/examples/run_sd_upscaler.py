@@ -26,7 +26,6 @@ if __name__ == "__main__":
         args.model, torch_dtype=torch.float16, 
         use_safetensors=True, low_cpu_mem_usage=True
     )
-    pipeline = pipeline.to("cuda")
 
     url = "https://huggingface.co/datasets/hf-internal-testing/diffusers-images/resolve/main/sd2-upscale/low_res_cat.png"
     response = requests.get(url)

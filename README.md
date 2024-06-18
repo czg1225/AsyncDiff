@@ -46,6 +46,7 @@
 <br>
 
 ### Updates
+* 🚀 **June 18, 2024**: Now supporting ControlNet! The inference sample of accelerating controlnet+SDXL can be found at [src/examples/run_sdxl_controlnet.py](https://github.com/czg1225/AsyncDiff/blob/main/src/examples/run_sdxl_controlnet.py).
 * 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [src/examples/run_sd_upscaler.py](https://github.com/czg1225/AsyncDiff/blob/main/src/examples/run_sd_upscaler.py).
 * 🚀 **June 12, 2024**: Code of AsyncDiff is released.
 
@@ -54,6 +55,7 @@
 - ✅ [Stable Diffusion 1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 - ✅ [Stable Diffusion x4 Upscaler](https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler) 
 - ✅ [Stable Diffusion XL 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) 
+- ✅ [ControlNet](https://huggingface.co/docs/diffusers/using-diffusers/controlnet#text-to-image) 
 - ✅ [Stable Video Diffusion](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt)
 - ✅ [AnimateDiff](https://huggingface.co/docs/diffusers/api/pipelines/animatediff)
 
@@ -124,6 +126,11 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 
 ### Accelerate Stable Diffusion x4 Upscaler:
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_sd_upscaler.py
+```
+
+### Accelerate ControlNet+SDXL :
+```python
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path src/examples/run_sdxl_controlnet.py
 ```
 
 ### Accelerate Animate Diffusion:
