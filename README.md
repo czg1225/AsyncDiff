@@ -46,8 +46,8 @@
 <br>
 
 ### Updates
-* 🚀 **June 18, 2024**: Now supporting ControlNet! The inference sample of accelerating controlnet+SDXL can be found at [src/examples/run_sdxl_controlnet.py](https://github.com/czg1225/AsyncDiff/blob/main/src/examples/run_sdxl_controlnet.py).
-* 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [src/examples/run_sd_upscaler.py](https://github.com/czg1225/AsyncDiff/blob/main/src/examples/run_sd_upscaler.py).
+* 🚀 **June 18, 2024**: Now supporting ControlNet! The inference sample of accelerating controlnet+SDXL can be found at [run_sdxl_controlnet.py](https://github.com/czg1225/AsyncDiff/blob/main/src/examples/run_sdxl_controlnet.py).
+* 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [run_sd_upscaler.py](https://github.com/czg1225/AsyncDiff/blob/main/src/examples/run_sd_upscaler.py).
 * 🚀 **June 12, 2024**: Code of AsyncDiff is released.
 
 ### Supported Diffusion Models:
