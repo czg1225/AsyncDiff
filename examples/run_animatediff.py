@@ -1,7 +1,7 @@
 import torch
 import torch.distributed as dist
 from diffusers.utils import export_to_gif
-from src.async_animate import AsyncDiff
+from asyncdiff.async_animate import AsyncDiff
 from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
 import time
 import argparse

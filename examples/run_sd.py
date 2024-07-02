@@ -1,7 +1,7 @@
 import torch
 import torch.distributed as dist
 from diffusers import StableDiffusionPipeline
-from src.async_sd import AsyncDiff
+from asyncdiff.async_sd import AsyncDiff
 import time
 import argparse
 

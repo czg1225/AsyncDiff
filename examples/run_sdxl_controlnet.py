@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import torch
 import torch.distributed as dist
-from src.async_sd import AsyncDiff
+from asyncdiff.async_sd import AsyncDiff
 import time
 import argparse
 
