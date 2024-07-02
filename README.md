@@ -144,8 +144,10 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --ru
 ```
 
 ## Qualitative Results
-Qualitative Results on SDXL. More qualitative results can be found in our [paper](https://arxiv.org/abs/2406.06911).
+Qualitative Results on SDXL and SD 2.1. More qualitative results can be found in our [paper](https://arxiv.org/abs/2406.06911).
 ![Qualitative Results](assets/qualitative.png)
+
+![Qualitative Results](assets/qualitative2.png)
 
 ## Quantitative Results
 Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion models, showcasing various configurations. More quantitative results can be found in our [paper](https://arxiv.org/abs/2406.06911).
