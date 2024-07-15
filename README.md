@@ -155,12 +155,10 @@ Quantitative evaluations of **AsyncDiff** on three text-to-image diffusion model
 
 ## Bibtex
 ```
-@misc{chen2024asyncdiff,
-      title={AsyncDiff: Parallelizing Diffusion Models by Asynchronous Denoising}, 
-      author={Zigeng Chen and Xinyin Ma and Gongfan Fang and Zhenxiong Tan and Xinchao Wang},
-      year={2024},
-      eprint={2406.06911},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@article{chen2024asyncdiff,
+  title={AsyncDiff: Parallelizing Diffusion Models by Asynchronous Denoising},
+  author={Chen, Zigeng and Ma, Xinyin and Fang, Gongfan and Tan, Zhenxiong and Wang, Xinchao},
+  journal={arXiv preprint arXiv:2406.06911},
+  year={2024}
 }
 ```
