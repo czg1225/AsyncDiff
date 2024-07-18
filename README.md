@@ -46,11 +46,13 @@
 <br>
 
 ### Updates
+* 🚀 **July 18, 2024**: Now supporting Stable Diffusion 3 Medium! The inference sample of accelerating SD 3 can be found at [run_s3.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd3.py).
 * 🚀 **June 18, 2024**: Now supporting ControlNet! The inference sample of accelerating controlnet+SDXL can be found at [run_sdxl_controlnet.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sdxl_controlnet.py).
 * 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [run_sd_upscaler.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd_upscaler.py).
 * 🚀 **June 12, 2024**: Code of AsyncDiff is released.
 
 ### Supported Diffusion Models:
+- ✅ [Stable Diffusion 3 Medium](https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers)
 - ✅ [Stable Diffusion 2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1)
 - ✅ [Stable Diffusion 1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 - ✅ [Stable Diffusion x4 Upscaler](https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler) 
@@ -108,10 +110,8 @@ Here, we use the Stable Diffusion pipeline as an example. You can replace `pipel
 
 
 
-
-
 ## Inference
-We offer detailed scripts in `examples/` for accelerating inference of SD 2.1, SD 1.5, SDXL, ControNet, SD_Upscaler, AnimateDiff, and SVD using our AsyncDiff framework.
+We offer detailed scripts in `examples/` for accelerating inference of SD 2.1, SD 1.5, SDXL, SD 3, ControNet, SD_Upscaler, AnimateDiff, and SVD using our AsyncDiff framework.
 
 ### Accelerate Stable Diffusion XL:
 ```python
@@ -121,6 +121,11 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 
 ### Accelerate Stable Diffusion 2.1 or 1.5:
 ```python
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --run-path examples/run_sd.py
+```
+
+### Accelerate Stable Diffusion 3 Medium:
+```python
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_sd3.py
 ```
 
 ### Accelerate Stable Diffusion x4 Upscaler:

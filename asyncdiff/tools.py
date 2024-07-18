@@ -10,6 +10,12 @@ class ResultPicker(object):
             result_tensor = torch.zeros(0)
             result_structure = []
             for res in result:
+                
+                #### for sd 3 ###
+                if res==None:
+                    res = result[1]
+                #################
+
                 res_tensor, res_structure = ResultPicker.dump(res)
                 result_tensor = result_tensor.to(res_tensor.device)
                 result_tensor = torch.cat((result_tensor, res_tensor))

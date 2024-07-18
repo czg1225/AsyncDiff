@@ -1,5 +1,9 @@
 def splite_model(pipe, pipe_id, n):
-    unet = pipe.unet
+    if pipe_id == "stabilityai/stable-diffusion-3-medium-diffusers":
+        transformer = pipe.transformer
+    else:
+        unet = pipe.unet
+
     if pipe_id == "stabilityai/stable-video-diffusion-img2vid-xt":
         if n == 2:
             return [
@@ -354,6 +358,39 @@ def splite_model(pipe, pipe_id, n):
                 unet.up_blocks[3],
                 unet.conv_norm_out,
                 unet.conv_out
+            )]
+        else:
+            raise NotImplementedError
+    elif pipe_id == "stabilityai/stable-diffusion-3-medium-diffusers": 
+        if n == 2:
+            return [(
+                *transformer.transformer_blocks[0:12],
+            ), (
+                *transformer.transformer_blocks[12:24],
+                transformer.norm_out,
+                transformer.proj_out
+            )]
+        elif n == 3:
+            return [(
+                *transformer.transformer_blocks[0:8],
+            ), (
+                *transformer.transformer_blocks[8:16],
+            ), (
+                *transformer.transformer_blocks[16:24],
+                transformer.norm_out,
+                transformer.proj_out
+            )]
+        elif n == 4:
+            return [(
+                *transformer.transformer_blocks[0:6],
+            ), (
+                *transformer.transformer_blocks[6:12],
+            ), (
+                *transformer.transformer_blocks[12:18],
+            ),(
+                *transformer.transformer_blocks[18:24],
+                transformer.norm_out,
+                transformer.proj_out
             )]
         else:
             raise NotImplementedError
