@@ -46,7 +46,7 @@
 <br>
 
 ### Updates
-* 🚀 **July 18, 2024**: Now supporting Stable Diffusion 3 Medium! The inference sample of accelerating SD 3 can be found at [run_s3.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd3.py).
+* 🚀 **July 18, 2024**: Now supporting Stable Diffusion 3 Medium! The inference sample of accelerating SD 3 can be found at [run_sd3.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd3.py).
 * 🚀 **June 18, 2024**: Now supporting ControlNet! The inference sample of accelerating controlnet+SDXL can be found at [run_sdxl_controlnet.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sdxl_controlnet.py).
 * 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [run_sd_upscaler.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd_upscaler.py).
 * 🚀 **June 12, 2024**: Code of AsyncDiff is released.
@@ -113,37 +113,37 @@ Here, we use the Stable Diffusion pipeline as an example. You can replace `pipel
 ## Inference
 We offer detailed scripts in `examples/` for accelerating inference of SD 2.1, SD 1.5, SDXL, SD 3, ControNet, SD_Upscaler, AnimateDiff, and SVD using our AsyncDiff framework.
 
-### Accelerate Stable Diffusion XL:
+### 🚀 Accelerate Stable Diffusion XL:
 ```python
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --run-path examples/run_sdxl.py
 ```
 
-### Accelerate Stable Diffusion 2.1 or 1.5:
+### 🚀 Accelerate Stable Diffusion 2.1 or 1.5:
 ```python
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nproc_per_node=4 --run-path examples/run_sd.py
 ```
 
-### Accelerate Stable Diffusion 3 Medium:
+### 🚀 Accelerate Stable Diffusion 3 Medium:
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_sd3.py
 ```
 
-### Accelerate Stable Diffusion x4 Upscaler:
+### 🚀 Accelerate Stable Diffusion x4 Upscaler:
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_sd_upscaler.py
 ```
 
-### Accelerate ControlNet+SDXL :
+### 🚀 Accelerate ControlNet+SDXL :
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_sdxl_controlnet.py
 ```
 
-### Accelerate Animate Diffusion:
+### 🚀 Accelerate Animate Diffusion:
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_animatediff.py
 ```
 
-### Accelerate Stable Video Diffusion:
+### 🚀 Accelerate Stable Video Diffusion:
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_svd.py
 ```

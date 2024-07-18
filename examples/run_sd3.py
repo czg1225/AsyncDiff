@@ -7,7 +7,7 @@ import argparse
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, default='stabilityai/stable-diffusion-3-medium-diffusers')     #model= 'runwayml/stable-diffusion-v1-5'
+    parser.add_argument("--model", type=str, default='stabilityai/stable-diffusion-3-medium-diffusers')     
     parser.add_argument("--prompt", type=str, default='A cat holding a sign that says hello world')
     parser.add_argument("--seed", type=int, default=20)
     parser.add_argument("--model_n", type=int, default=2)
@@ -17,7 +17,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     pipeline = StableDiffusion3Pipeline.from_pretrained(args.model, torch_dtype=torch.float16, low_cpu_mem_usage=True)
-
     async_diff = AsyncDiff(pipeline, model_n=args.model_n, stride=args.stride, time_shift=args.time_shift)
 
     # warm up
