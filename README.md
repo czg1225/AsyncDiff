@@ -46,6 +46,7 @@
 <br>
 
 ### Updates
+* 🚀 **August 14, 2024**: Now supporting Stable Diffusion XL Inpainting! The inference sample of accelerating SDXL Inpainting can be found at [run_sdxl_inpaint.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sdxl_inpaint.py).
 * 🚀 **July 18, 2024**: Now supporting Stable Diffusion 3 Medium! The inference sample of accelerating SD 3 can be found at [run_sd3.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd3.py).
 * 🚀 **June 18, 2024**: Now supporting ControlNet! The inference sample of accelerating controlnet+SDXL can be found at [run_sdxl_controlnet.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sdxl_controlnet.py).
 * 🚀 **June 17, 2024**: Now supporting Stable Diffusion x4 Upscaler! The inference sample can be found at [run_sd_upscaler.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd_upscaler.py).
@@ -57,6 +58,7 @@
 - ✅ [Stable Diffusion 1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 - ✅ [Stable Diffusion x4 Upscaler](https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler) 
 - ✅ [Stable Diffusion XL 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) 
+- ✅ [Stable Diffusion XL Inpaiting](https://huggingface.co/diffusers/stable-diffusion-xl-1.0-inpainting-0.1) 
 - ✅ [ControlNet](https://huggingface.co/docs/diffusers/using-diffusers/controlnet#text-to-image) 
 - ✅ [Stable Video Diffusion](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt)
 - ✅ [AnimateDiff](https://huggingface.co/docs/diffusers/api/pipelines/animatediff)
@@ -131,6 +133,11 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --ru
 ### 🚀 Accelerate Stable Diffusion x4 Upscaler:
 ```python
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_sd_upscaler.py
+```
+
+### 🚀 Accelerate SDXL Inpainting:
+```python
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.run --nproc_per_node=2 --run-path examples/run_sdxl_inpaint.py
 ```
 
 ### 🚀 Accelerate ControlNet+SDXL :

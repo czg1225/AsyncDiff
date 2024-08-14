@@ -201,7 +201,7 @@ def splite_model(pipe, pipe_id, n):
             )]
         else:
             raise NotImplementedError
-    elif pipe_id == "stabilityai/stable-diffusion-xl-base-1.0" or pipe_id == "RunDiffusion/Juggernaut-X-v10": 
+    elif pipe_id == "stabilityai/stable-diffusion-xl-base-1.0" or pipe_id == "RunDiffusion/Juggernaut-X-v10" or pipe_id == "diffusers/stable-diffusion-xl-1.0-inpainting-0.1": 
         if n == 2:
             return [(
                 unet.down_blocks[2],
