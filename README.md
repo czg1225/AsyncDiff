@@ -58,7 +58,7 @@
 - ✅ [Stable Diffusion 1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 - ✅ [Stable Diffusion x4 Upscaler](https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler) 
 - ✅ [Stable Diffusion XL 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) 
-- ✅ [Stable Diffusion XL Inpaiting](https://huggingface.co/diffusers/stable-diffusion-xl-1.0-inpainting-0.1) 
+- ✅ [Stable Diffusion XL Inpainting](https://huggingface.co/diffusers/stable-diffusion-xl-1.0-inpainting-0.1) 
 - ✅ [ControlNet](https://huggingface.co/docs/diffusers/using-diffusers/controlnet#text-to-image) 
 - ✅ [Stable Video Diffusion](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt)
 - ✅ [AnimateDiff](https://huggingface.co/docs/diffusers/api/pipelines/animatediff)
