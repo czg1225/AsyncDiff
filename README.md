@@ -10,10 +10,10 @@
     <img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache%202.0-4E94CE.svg">
   </a>
   <a href="https://arxiv.org/abs/2406.06911">
-    <img src="https://img.shields.io/badge/Paper-Arixv-FFB000.svg" alt="Paper">
+    <img src="https://img.shields.io/badge/Conference-NeurIPS'24-924E7D.svg" alt="Paper">
   </a>
   <a href="https://czg1225.github.io/asyncdiff_page/">
-    <img src="https://img.shields.io/badge/Project-Page-924E7D.svg" alt="Project">
+    <img src="https://img.shields.io/badge/Project-Page-FFB000.svg" alt="Project">
   </a>
   <a href="https://pytorch.org/">
     <img src="https://img.shields.io/badge/PyTorch-%3E=v2.0.1-EE4C2C.svg" alt="PyTorch>=v2.0.1">
@@ -24,7 +24,7 @@
 > **AsyncDiff: Parallelizing Diffusion Models by Asynchronous Denoising**   
 > [Zigeng Chen](https://github.com/czg1225), [Xinyin Ma](https://horseee.github.io/), [Gongfan Fang](https://fangggf.github.io/), [Zhenxiong Tan](https://github.com/Yuanshi9815), [Xinchao Wang](https://sites.google.com/site/sitexinchaowang/)   
 > [Learning and Vision Lab](http://lv-nus.org/), National University of Singapore  
-> 🥯[[Arxiv]](https://arxiv.org/abs/2406.06911)🎄[[Project Page]](https://czg1225.github.io/asyncdiff_page/) \
+> 🥯[[Paper]](https://arxiv.org/abs/2406.06911)🎄[[Project Page]](https://czg1225.github.io/asyncdiff_page/) \
 > Code Contributors: [Zigeng Chen](https://github.com/czg1225), [Zhenxiong Tan](https://github.com/Yuanshi9815)
 
 <div align="center">
@@ -46,6 +46,7 @@
 <br>
 
 ### Updates
+* :tada: **September 26, 2024**: Our AsyncDiff is accepted by NeurIPS 2024!
 * 🚀 **August 14, 2024**: Now supporting Stable Diffusion XL Inpainting! The inference sample of accelerating SDXL Inpainting can be found at [run_sdxl_inpaint.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sdxl_inpaint.py).
 * 🚀 **July 18, 2024**: Now supporting Stable Diffusion 3 Medium! The inference sample of accelerating SD 3 can be found at [run_sd3.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sd3.py).
 * 🚀 **June 18, 2024**: Now supporting ControlNet! The inference sample of accelerating controlnet+SDXL can be found at [run_sdxl_controlnet.py](https://github.com/czg1225/AsyncDiff/blob/main/examples/run_sdxl_controlnet.py).
