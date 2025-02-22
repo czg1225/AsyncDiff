@@ -23,7 +23,7 @@
 
 > **AsyncDiff: Parallelizing Diffusion Models by Asynchronous Denoising**   
 > [Zigeng Chen](https://github.com/czg1225), [Xinyin Ma](https://horseee.github.io/), [Gongfan Fang](https://fangggf.github.io/), [Zhenxiong Tan](https://github.com/Yuanshi9815), [Xinchao Wang](https://sites.google.com/site/sitexinchaowang/)   
-> [Learning and Vision Lab](http://lv-nus.org/), National University of Singapore  
+> [xML Lab](https://sites.google.com/view/xml-nus), National University of Singapore  
 > 🥯[[Paper]](https://arxiv.org/abs/2406.06911)🎄[[Project Page]](https://czg1225.github.io/asyncdiff_page/) \
 > Code Contributors: [Zigeng Chen](https://github.com/czg1225), [Zhenxiong Tan](https://github.com/Yuanshi9815)
 
